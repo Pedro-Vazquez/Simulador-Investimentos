@@ -15,13 +15,7 @@ public class Investimento {
 
     private double montante;
 
-    private double taxa;
-
-    public void calculaMontante() {
-        setTaxa(0.007);
-        setMontante(getValor() * Math.pow(1 + getTaxa(), getQuantidadeMeses()));
-    }
-
+    //region Get/Set
     public int getId() {
         return id;
     }
@@ -54,11 +48,5 @@ public class Investimento {
         this.montante = montante;
     }
 
-    public double getTaxa() {
-        return taxa;
-    }
-
-    public void setTaxa(double taxa) {
-        this.taxa = taxa;
-    }
+    //endregion
 }
