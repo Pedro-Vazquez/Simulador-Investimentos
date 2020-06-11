@@ -1,5 +1,6 @@
 package com.mastertech.investimento.web;
 
+import com.mastertech.investimento.web.dto.InvestimentoPayload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,19 +18,20 @@ public class InvestimentoController {
     private InvestimentoService investimentoService;
 
     @GetMapping("investimento")
-    public List<Investimento> getAll(){
-        List<Investimento> responses = new ArrayList<Investimento>();
+    public List<InvestimentoPayload> getAll() {
+        List<InvestimentoPayload> responses = new ArrayList<>();
 
-        for(Investimento investimento : investimentoService.getAll()){
-            responses.add(investimento);
+        for (Investimento investimento : investimentoService.getAll()) {
+            responses.add(new InvestimentoPayload(investimento));
         }
 
         return responses;
     }
 
     @PostMapping("investimento")
-    public Investimento create(@RequestBody Investimento investimento){
-        return investimentoService.create(investimento);
+    public InvestimentoPayload create(@RequestBody InvestimentoPayload investimentoPayload) {
+        Investimento investimento = investimentoPayload.buildEntity();
+        return new InvestimentoPayload(investimentoService.create(investimento));
     }
 
 }
